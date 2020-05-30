@@ -14,12 +14,9 @@ var scorePlayer, roundScore, activePlayer, diceDOM, gamePlaying;
 // GAME INIT
 init();
 
-
 //ROLL THE DICE ACTION 
 //For each Action we select the button where we will roll the dice(Event Handler)
 document.querySelector('.btn-roll').addEventListener('click',function() {
-    // What happens as soon as someone clicks the button?:
-
     if(gamePlaying){
         //1. We need a random number
         var dice = Math.floor(Math.random() * 6)+1;
@@ -29,12 +26,10 @@ document.querySelector('.btn-roll').addEventListener('click',function() {
         diceDOM.src = 'dice-' + dice + '.png';
 
         //3. Update the round score only if the roll number isn't 1
-        
         if (dice !== 1) {
             //Add value to the roundscore of the current player and print it
             roundScore += dice;
             document.getElementById('current-'+ activePlayer).textContent = roundScore;
-
         } else {
             //The actual player lost current points
             changePlayer();
@@ -45,10 +40,12 @@ document.querySelector('.btn-roll').addEventListener('click',function() {
  //HOLD ACTION
  document.querySelector('.btn-hold').addEventListener('click',function(){
     if (gamePlaying) {
-            //Add the current score to the global scole
+        //Add the current score to the global scole
         scorePlayer[activePlayer] += roundScore;
+        
         //Update the UI
         document.getElementById('score-'+ activePlayer).textContent = scorePlayer[activePlayer];
+        
         //Check if player won the game
         if (scorePlayer[activePlayer] >= 20) {
             roundScore = 0;   
@@ -70,18 +67,18 @@ document.querySelector('.btn-roll').addEventListener('click',function() {
 // NEW GAME ACTION
  document.querySelector('.btn-new').addEventListener('click',init);
 
-
 //FUNCTIONS
  function changePlayer(){
     //The actual player lost current points or just if it click hold option
    roundScore = 0;
    document.getElementById('current-'+ activePlayer).textContent = roundScore;
+   
    // Player change turn
    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
    document.querySelector('.player-0-panel').classList.toggle('active');
    document.querySelector('.player-1-panel').classList.toggle('active');
-
-    //Hide the DICE
+    
+   //Hide the DICE
     diceDOM.style.display = 'none';
 }
  function init(){
