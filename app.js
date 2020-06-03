@@ -18,7 +18,7 @@ init();
 //For each Action we select the button where we will roll the dice(Event Handler)
 document.querySelector('.btn-roll').addEventListener('click',function() {
     document.querySelector('.btn-winningScore').style.display = 'none';
-    
+
     if(gamePlaying){
         //1. We need a random number and another variable to store previous dice roll
         dice = Math.floor(Math.random() * 6)+1;
@@ -133,8 +133,6 @@ function init(){
    //Hide the DICE
     diceDOM.style.display = 'none';
 }
-
-
 
 
 /*

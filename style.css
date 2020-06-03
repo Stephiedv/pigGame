@@ -134,11 +134,6 @@ input {
     text-align: center;
     text-transform: uppercase;
     cursor: pointer;
-    
-    /*
-    
-    transform: translateX(-50%);
-    */
 }
 
 button:hover { font-weight: 600; }
