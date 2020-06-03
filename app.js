@@ -9,7 +9,7 @@ GAME RULES:
 
 
 //GLOBAL VARS
-var scorePlayer, roundScore, activePlayer, gamePlaying, dice1, dice2, lastDice, winningScore, dice1Dom, dice2Dom, panel0, panel1;
+var scorePlayer, roundScore, activePlayer, gamePlaying, dice1, dice2, lastSumDice, winningScore, dice1Dom, dice2Dom, panel0, panel1, sumDice;
 
 // GAME INIT
 init();
@@ -23,7 +23,7 @@ document.querySelector('.btn-roll').addEventListener('click',function() {
         //1. We need a random number and another variable to store previous dice roll
         dice1 = randomNumber();
         dice2 = randomNumber();
-        
+        sumDice = dice1 + dice2;
         //2. Display the result
         dice1Dom.style.display = 'block';
         dice2Dom.style.display = 'block';
@@ -31,7 +31,7 @@ document.querySelector('.btn-roll').addEventListener('click',function() {
         dice2Dom.src = 'dice-' + dice2 + '.png';
         
 
-    if (dice1 === 6 && lastDice === 6) {
+    if (sumDice === 6 && lastSumDice === 6) {
             //1. Actual playerer looses his ENTIRE score 
             scorePlayer[activePlayer] = 0;
             document.getElementById('score-'+ activePlayer).textContent = scorePlayer[activePlayer];
@@ -42,9 +42,9 @@ document.querySelector('.btn-roll').addEventListener('click',function() {
             //3. Update the round score only if the roll number isn't 1 or rolls two 6 in a row
             if (dice1 !== 1 && dice2 !== 1) {
                 //Add value to the roundscore of the current player and print it
-                roundScore += dice1 + dice2;
+                roundScore += sumDice;
                 document.getElementById('current-'+ activePlayer).textContent = roundScore;
-                lastDice = dice1;
+                lastSumDice = sumDice;
             } else {
                 //The actual player lost current points
                 changePlayer();
@@ -98,7 +98,8 @@ function init(){
     roundScore = 0;
     activePlayer = 0;
     gamePlaying = true;
-    lastDice = 0;
+    sumDice = 0;
+    lastSumDice = 0;
     winningScore = 0;
     dice1Dom = document.getElementById("dice-1");
     dice2Dom = document.getElementById("dice-2");
@@ -125,7 +126,7 @@ function init(){
     //The actual player lost current points or just if it click hold option
    roundScore = 0;
    document.getElementById('current-'+ activePlayer).textContent = roundScore;
-   lastDice =0;
+   lastSumDice =0;
 
    // Player change turn
    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
@@ -138,8 +139,9 @@ function init(){
 }
 
 function randomNumber(){
-    Math.floor(Math.random() * 6)+1;
+    return Math.floor(Math.random() * 6)+1;
 }
+
 
 
 /*
