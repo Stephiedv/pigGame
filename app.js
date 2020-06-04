@@ -86,10 +86,11 @@ document.querySelector('.btn-roll').addEventListener('click',function() {
  document.querySelector('.btn-new').addEventListener('click',init);
 
   //INPUT ACTION
-  document.querySelector('.btn-winningScore').addEventListener('click',function(){
+  document.querySelector('.btn-winningScore').addEventListener('change',function(){
         winningScore = document.getElementById("input-0").value;
         console.log(winningScore);
 });
+
 
 //FUNCTIONS
 function init(){
@@ -100,7 +101,7 @@ function init(){
     gamePlaying = true;
     sumDice = 0;
     lastSumDice = 0;
-    winningScore = 0;
+    winningScore = 100;
     dice1Dom = document.getElementById("dice-1");
     dice2Dom = document.getElementById("dice-2");
     panel0 = document.querySelector('.player-0-panel');
@@ -120,7 +121,9 @@ function init(){
     panel0.classList.remove('active');
     panel1.classList.remove('active');
     panel0.classList.add('active');
-    document.querySelector('.btn-winningScore').style.display = 'block';    
+    document.querySelector('.btn-winningScore').style.display = 'block';
+    document.getElementById("input-0").value = winningScore;
+  
 }
  function changePlayer(){
     //The actual player lost current points or just if it click hold option
